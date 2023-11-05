@@ -45,12 +45,13 @@ void rockPaperScissors(double Balance, double Cash);
 void startRockPaperScissors(double Balance, double Cash);
 string rpsProgramChoiceToString(int ProgramChoice);
 void rpsProgramAnswer(double Balance, double Cash, double Amount);
+void tutorialRockPaperScissors(double Balance, double Cash);
 void rockPaperScissorsText();
 
 
 //MAIN
 int main(){
-    double Balance = 0, Cash = 100;
+    double Balance = 0, Cash = 1000;
     menu(Balance, Cash);
 }
 
@@ -922,7 +923,7 @@ string guessNumHint(){
 }
 
 void guessNumProgressingAnswer(double Balance, double Cash ,int ProgramChoice, int Amount, int Tries, bool Finish){
-    string Hint = guessNumHint();
+    string Hint = guessNumHint(), yesno = " ";
     int playerGuess = 0, Choice = 0;
         cout << "Hint : " << Hint << endl;
         cout << "You got " << Tries << " tries left." << endl;
@@ -974,23 +975,17 @@ void guessNumProgressingAnswer(double Balance, double Cash ,int ProgramChoice, i
                 cout << "The Program has choosen the number : " << ProgramChoice << endl;
                 cout << "Your Cash now is $" << setprecision(2) << fixed << Cash << "." << endl;
                 Sleep(2000);
-                cout << "Pick a choice : " << endl ;
-                cout << "1. Play again" << endl ;
-                cout << "2. Exit" << endl ;
-                cout << "Enter your choice : ";
-                cin >> Choice;
+                cout << endl << endl;
+                cout << "Wanna continue playing? (Y/N) : ";
+                cin >> yesno;
                 cin.clear();
                 fflush(stdin);
-
-                switch (Choice){
-                    case 1:
-                        startGuessNum(Balance, Cash);
-                        break;
-                    case 2:
-                        casinoMenu(Balance, Cash);
-                        break;
-                    default:
-                    break;
+                if (yesno == "Y" || yesno == "y"){
+                    cout << "Restarting the Game..." << endl;
+                    Sleep(2000);
+                    startGuessNum(Balance, Cash);
+                } else {
+                    casinoMenu(Balance, Cash);
                 }
             }
         } else {
@@ -1003,23 +998,17 @@ void guessNumProgressingAnswer(double Balance, double Cash ,int ProgramChoice, i
             cout << "The Program has choosen the number : " << ProgramChoice << endl;
             cout << "Your Cash now is $" << setprecision(2) << fixed << Cash << "." << endl;
             Sleep(2000);
-            cout << "Pick a choice : " << endl ;
-            cout << "1. Play again" << endl ;
-            cout << "2. Exit" << endl ;
-            cout << "Enter your choice : ";
-            cin >> Choice;
+            cout << endl << endl;
+            cout << "Wanna continue playing? (Y/N) : ";
+            cin >> yesno;
             cin.clear();
             fflush(stdin);
-
-            switch (Choice){
-                case 1:
-                    startGuessNum(Balance, Cash);
-                    break;
-                case 2:
-                    casinoMenu(Balance, Cash);
-                    break;
-                default:
-                break;
+            if (yesno == "Y" || yesno == "y"){
+                cout << "Restarting the Game..." << endl;
+                Sleep(2000);
+                startGuessNum(Balance, Cash);
+            } else {
+                casinoMenu(Balance, Cash);
             }
         }
 
@@ -1188,7 +1177,7 @@ void rockPaperScissors(double Balance, double Cash){
             break;
         case 2:
             success = true;
-            tutorialGuessNum(Balance,Cash);
+            tutorialRockPaperScissors(Balance,Cash);
             break;
         case 3:
             success = true;
@@ -1451,6 +1440,49 @@ string rpsProgramChoiceToString(int ProgramChoice){
     }
 
     return stringProgramChoice;
+}
+
+void tutorialRockPaperScissors(double Balance, double Cash){
+    int Choice = 0;
+    rockPaperScissorsText();
+    cout << "Tutorial : " << endl << endl;
+
+    cout << "This game its just about simple Rock Paper Scissors game." << endl;
+    cout << "But you play it with a bot." << endl << endl;
+    cout << "Pick a choice : " << endl;
+    cout << "1. Begin Playing" << endl;
+    cout << "2. Exit" << endl << endl;
+    cout << "Enter your number of the choice above : ";
+    cin >> Choice;
+    cin.clear();
+    fflush(stdin);
+
+    bool success = false;
+
+    do {
+        switch (Choice)
+        {
+        case 1:
+            success = true;
+            startRockPaperScissors(Balance, Cash);
+            break;
+        case 2:
+            success = true;
+            casinoMenu(Balance, Cash);
+            break;
+        default:
+            cout << endl;
+            cout << "============================" << endl;
+            cout << "Theres only a 2 choices, its : " << endl;
+            cout << "1. Begin Playing" << endl;
+            cout << "2. Exit" << endl << endl;
+            cout << "Enter your number again of the choice above : ";
+            cin >> Choice;
+            cin.clear();
+            fflush(stdin);
+            break;
+        }
+    }while(!success);
 }
 
 void rockPaperScissorsText(){
