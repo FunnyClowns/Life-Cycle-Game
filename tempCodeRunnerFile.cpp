@@ -1,0 +1,1 @@
+    double Balance = 0, Cash = 0;

@@ -51,7 +51,7 @@ void rockPaperScissorsText();
 
 //MAIN
 int main(){
-    double Balance = 0, Cash = 1000;
+    double Balance = 0, Cash = 0;
     menu(Balance, Cash);
 }
 
